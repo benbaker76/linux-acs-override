@@ -1,7 +1,7 @@
 #!/bin/bash
 ACSOPATCH_VER=6.3
 KERNEL_VER=6.3
-sudo apt install build-essential libncurses5-dev fakeroot xz-utils libelf-dev liblz4-tool unzip
+sudo apt install build-essential libncurses5-dev fakeroot xz-utils libelf-dev liblz4-tool unzip flex bison
 wget -N https://raw.githubusercontent.com/benbaker76/linux-acs-override/main/6.3/acso.patch
 wget -N https://github.com/torvalds/linux/archive/refs/tags/v$KERNEL_VER.zip
 unzip -o v$KERNEL_VER.zip
