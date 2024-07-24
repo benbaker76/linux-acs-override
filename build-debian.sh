@@ -8,4 +8,7 @@ wget -N https://github.com/torvalds/linux/archive/refs/tags/v$KERNEL_VER.zip
 unzip -o v$KERNEL_VER.zip
 cd linux-$KERNEL_VER
 patch -p1 < ../acso.patch
-sudo make olddefconfig -j $(nproc) bindeb-pkg LOCALVERSION=-acso KDEB_PKGVERSION=$(make kernelversion)-1
+make olddefconfig
+sed -i 's/^CONFIG_SYSTEM_TRUSTED_KEYS.*/CONFIG_SYSTEM_TRUSTED_KEYS=""/' .config
+sed -i 's/^CONFIG_SYSTEM_REVOCATION_KEYS.*/CONFIG_SYSTEM_REVOCATION_KEYS=""/' .config
+sudo make -j $(nproc) bindeb-pkg LOCALVERSION=-acso KDEB_PKGVERSION=$(make kernelversion)-1
