@@ -69,6 +69,12 @@ Add `pcie_acs_override=downstream,multifunction` to the `GRUB_CMDLINE_LINUX_DEFA
 GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pcie_acs_override=downstream,multifunction"
 ```
 
+You can also change this line to boot directly into the ACS patched kernel on boot:
+
+```
+GRUB_DEFAULT="1>Ubuntu, with Linux 6.3.0-acso"
+```
+
 ### Update GRUB
 
 ```sh
