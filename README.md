@@ -33,7 +33,7 @@ Alternative Routing-ID Interpretation (ARI) is a feature introduced in the PCI E
 
 Enabling ARI can aid in creating additional IOMMU groups, facilitating better device isolation in virtualization scenarios. To enable ARI in the BIOS/UEFI settings, navigate to the PCIe or chipset configuration section. Look for two settings: `PCIe ARI Support` and `PCIe ARI Enumeration`. Set both to `Enabled` to activate ARI functionality.
 
-## Installation
+# Installation
 
 ### Confirm Current IOMMU Groups
 
