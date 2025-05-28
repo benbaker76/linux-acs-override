@@ -14,6 +14,12 @@ References and ACS Override Alternatives:
 
 [https://heiko-sieger.info/iommu-groups-what-you-need-to-consider/](https://heiko-sieger.info/iommu-groups-what-you-need-to-consider/) [https://forum.level1techs.com/t/the-pragmatic-neckbeard-3-vfio-iommu-and-pcie/111251](https://forum.level1techs.com/t/the-pragmatic-neckbeard-3-vfio-iommu-and-pcie/111251) [https://bugzilla.redhat.com/show_bug.cgi?id=1113399](https://bugzilla.redhat.com/show_bug.cgi?id=1113399) [https://bugzilla.redhat.com/attachment.cgi?id=913028&action=diff](https://bugzilla.redhat.com/attachment.cgi?id=913028&action=diff)
 
+## Alternative Routing-ID Interpretation (ARI)
+
+Alternative Routing-ID Interpretation (ARI) is a feature introduced in the PCI Express (PCIe) 3.0 specification that enhances device addressing capabilities. Traditionally, PCIe devices are limited to eight functions per device, identified by a 3-bit function number. With ARI enabled, the function number field expands to 8 bits, allowing up to 256 functions per device. This expansion is particularly beneficial for technologies like Single Root I/O Virtualization (SR-IOV), which require multiple virtual functions per physical device .
+
+Enabling ARI can aid in creating additional IOMMU groups, facilitating better device isolation in virtualization scenarios. To enable ARI in the BIOS/UEFI settings, navigate to the PCIe or chipset configuration section. Look for two settings: `PCIe ARI Support` and `PCIe ARI Enumeration`. Set both to `Enabled` to activate ARI functionality.
+
 ## Installation
 
 ### Confirm Current IOMMU Groups
