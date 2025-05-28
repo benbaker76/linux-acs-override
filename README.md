@@ -14,6 +14,19 @@ References and ACS Override Alternatives:
 
 [https://heiko-sieger.info/iommu-groups-what-you-need-to-consider/](https://heiko-sieger.info/iommu-groups-what-you-need-to-consider/) [https://forum.level1techs.com/t/the-pragmatic-neckbeard-3-vfio-iommu-and-pcie/111251](https://forum.level1techs.com/t/the-pragmatic-neckbeard-3-vfio-iommu-and-pcie/111251) [https://bugzilla.redhat.com/show_bug.cgi?id=1113399](https://bugzilla.redhat.com/show_bug.cgi?id=1113399) [https://bugzilla.redhat.com/attachment.cgi?id=913028&action=diff](https://bugzilla.redhat.com/attachment.cgi?id=913028&action=diff)
 
+# Alternatives
+
+Before resorting to the ACS Override Patch to manipulate IOMMU groupings for PCI passthrough in Linux, it's advisable to first verify whether your CPU and motherboard natively support Access Control Services (ACS) or Alternative Routing-ID Interpretation (ARI). Enabling these features in your system's BIOS/UEFI settings can often provide the necessary device isolation without the need for kernel modifications. The ACS Override Patch, while useful in certain scenarios, is generally considered a last resort due to potential security and stability concerns. It can make devices appear isolated in software when they are not physically separated at the hardware level, potentially leading to unintended interactions between devices. Therefore, leveraging native hardware support for ACS or ARI is the preferred and safer approach for achieving proper device isolation in virtualization setups.
+
+## Access Control Services (ACS)
+
+Access Control Services (ACS) is a feature defined in the PCI Express (PCIe) specification that enhances security and isolation within the PCIe topology. ACS provides control points that determine whether a Transaction Layer Packet (TLP) should be routed normally, blocked, or redirected. This is particularly important in virtualization scenarios, where isolating devices into separate IOMMU groups is necessary for secure and efficient device assignment to virtual machines. Enabling ACS can help in achieving finer granularity in IOMMU groupings, facilitating better device isolation.
+Intel+1Rambus+1
+
+To enable ACS in the BIOS/UEFI settings, navigate to the PCIe or chipset configuration section. Look for settings labeled `ACS Enable` or `Access Control Services` and set them to `Enabled`. In some systems, enabling ACS may require first enabling `PCIe AER Support` (Advanced Error Reporting), as these settings can be interdependent.
+
+It's important to note that while enabling ACS can improve device isolation, it may also impact performance in certain scenarios. For example, enabling ACS can force peer-to-peer PCIe transactions to route through the PCIe root complex, potentially reducing performance for workloads that rely on direct device-to-device communication. Therefore, consider the specific requirements of your system and workloads when deciding to enable ACS.
+
 ## Alternative Routing-ID Interpretation (ARI)
 
 Alternative Routing-ID Interpretation (ARI) is a feature introduced in the PCI Express (PCIe) 3.0 specification that enhances device addressing capabilities. Traditionally, PCIe devices are limited to eight functions per device, identified by a 3-bit function number. With ARI enabled, the function number field expands to 8 bits, allowing up to 256 functions per device. This expansion is particularly beneficial for technologies like Single Root I/O Virtualization (SR-IOV), which require multiple virtual functions per physical device .
