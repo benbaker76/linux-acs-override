@@ -21,7 +21,6 @@ Before resorting to the ACS Override Patch to manipulate IOMMU groupings for PCI
 ## Access Control Services (ACS)
 
 Access Control Services (ACS) is a feature defined in the PCI Express (PCIe) specification that enhances security and isolation within the PCIe topology. ACS provides control points that determine whether a Transaction Layer Packet (TLP) should be routed normally, blocked, or redirected. This is particularly important in virtualization scenarios, where isolating devices into separate IOMMU groups is necessary for secure and efficient device assignment to virtual machines. Enabling ACS can help in achieving finer granularity in IOMMU groupings, facilitating better device isolation.
-Intel+1Rambus+1
 
 To enable ACS in the BIOS/UEFI settings, navigate to the PCIe or chipset configuration section. Look for settings labeled `ACS Enable` or `Access Control Services` and set them to `Enabled`. In some systems, enabling ACS may require first enabling `PCIe AER Support` (Advanced Error Reporting), as these settings can be interdependent.
 
